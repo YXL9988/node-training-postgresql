@@ -189,8 +189,14 @@ const requestListener = async (req, res) => {
       }))
       res.end()
       } catch (error) {
-
-      } 
+          console.error(error)
+          res.writeHead(500, headers)
+          res.write(JSON.stringify({
+            status: "error",
+            message: "伺服器錯誤"
+          }))
+          res.end()
+        }
       })
   } else if (req.url.startsWith("/api/coaches/skill/") && req.method === "DELETE") {
     try {
